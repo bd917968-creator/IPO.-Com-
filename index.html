@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPO.Com</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
+  color:#172033;
+}
+header{
+  background:#111827;
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  font-size:27px;
+  font-weight:bold;
+}
+.demo{
+  background:#dc2626;
+  color:#fff;
+  text-align:center;
+  padding:9px;
+  font-weight:bold;
+}
+.container{
+  max-width:620px;
+  margin:auto;
+  padding:15px;
+}
+.card{
+  background:#fff;
+  padding:20px;
+  margin:15px 0;
+  border-radius:16px;
+  box-shadow:0 5px 18px #0001;
+}
+input,button{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border-radius:9px;
+  font-size:16px;
+}
+input{border:1px solid #d1d5db}
+button{
+  border:0;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+}
+.green{background:#16a34a}
+.red{background:#dc2626}
+.hidden{display:none}
+.balance{
+  background:#111827;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  border-radius:16px;
+}
+.balance h1{margin:7px 0}
+nav{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin:15px 0;
+}
+nav button{margin:0;font-size:14px}
+.package{
+  border:2px solid #e5e7eb;
+  padding:15px;
+  margin:12px 0;
+  border-radius:13px;
+}
+.package h3{margin:0 0 8px}
+.price{
+  font-size:25px;
+  font-weight:bold;
+}
+.refbox{
+  background:#f1f5f9;
+  padding:12px;
+  border-radius:9px;
+  word-break:break-all;
+}
+.stat{
+  display:flex;
+  justify-content:space-between;
+  background:#f8fafc;
+  padding:13px;
+  border-radius:9px;
+  margin:8px 0;
+}
+.small{
+  color:#64748b;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>IPO.Com</header>
+
+<div class="demo">
+  DEMO — NO REAL MONEY
+</div>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginPage" class="card">
+  <h2>🔐 Login</h2>
+
+  <input id="loginMobile"
+         placeholder="মোবাইল নম্বর">
+
+  <input id="loginPassword"
+         type="password"
+         placeholder="পাসওয়ার্ড">
+
+  <button onclick="login()">Login</button>
+
+  <button class="green" onclick="showRegister()">
+    নতুন অ্যাকাউন্ট খুলুন
+  </button>
+</div>
+
+
+<!-- REGISTER -->
+<div id="registerPage" class="card hidden">
+  <h2>📝 Registration</h2>
+
+  <input id="regMobile"
+         placeholder="মোবাইল নম্বর">
+
+  <input id="regPassword"
+         type="password"
+         placeholder="পাসওয়ার্ড">
+
+  <input id="regReferral"
+         placeholder="Referral Code (ঐচ্ছিক)">
+
+  <button onclick="register()">Register</button>
+
+  <button class="red" onclick="showLogin()">
+    Login পেজে যান
+  </button>
+</div>
+
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+
+  <div class="balance">
+    <div>Demo Balance</div>
+    <h1 id="balance">৳0</h1>
+    <div class="small" style="color:#cbd5e1">
+      শুধুমাত্র ডেমো ব্যালেন্স
+    </div>
+  </div>
+
+  <nav>
+    <button onclick="showSection('packages')">
+      📦 Packages
+    </button>
+
+    <button onclick="showSection('deposit')">
+      💳 Deposit
+    </button>
+
+    <button onclick="showSection('referral')">
+      🔗 Referral
+    </button>
+  </nav>
+
+
+  <!-- PACKAGES -->
+  <div id="packages" class="card">
+    <h2>📦 Packages</h2>
+
+    <div class="package">
+      <h3>Package 1</h3>
+      <div class="price">৳500</div>
+      <p>সময়: 60 দিন</p>
+      <p>ডেমো রিটার্ন: 10%</p>
+      <button onclick="selectPackage(500)">
+        Select
+      </button>
+    </div>
+
+    <div class="package">
+      <h3>Package 2</h3>
+      <div class="price">৳800</div>
+      <p>সময়: 60 দিন</p>
+      <p>ডেমো রিটার্ন: 15%</p>
+      <button onclick="selectPackage(800)">
+        Select
+      </button>
+    </div>
+
+    <div class="package">
+      <h3>Package 3</h3>
+      <div class="price">৳1,000</div>
+      <p>সময়: 45 দিন</p>
+      <p>ডেমো রিটার্ন: 20%</p>
+      <button onclick="selectPackage(1000)">
+        Select
+      </button>
+    </div>
+
+    <div class="package">
+      <h3>Package 4</h3>
+      <div class="price">৳2,500</div>
+      <p>সময়: 45 দিন</p>
+      <p>ডেমো রিটার্ন: 25%</p>
+      <button onclick="selectPackage(2500)">
+        Select
+      </button>
+    </div>
+
+    <div class="package">
+      <h3>Package 5</h3>
+      <div class="price">৳5,000</div>
+      <p>সময়: 30 দিন</p>
+      <p>ডেমো রিটার্ন: 30%</p>
+      <button onclick="selectPackage(5000)">
+        Select
+      </button>
+    </div>
+
+    <div class="package">
+      <h3>Package 6</h3>
+      <div class="price">৳10,000</div>
+      <p>সময়: 30 দিন</p>
+      <p>ডেমো রিটার্ন: 35%</p>
+      <button onclick="selectPackage(10000)">
+        Select
+      </button>
+    </div>
+  </div>
+
+
+  <!-- DEPOSIT -->
+  <div id="deposit" class="card hidden">
+    <h2>💳 Demo Deposit</h2>
+
+    <p>Selected Amount</p>
+
+    <h2 id="selectedAmount">৳0</h2>
+
+    <hr>
+
+    <p><b>Deposit Number</b></p>
+
+    <div style="
+      background:#f1f5f9;
+      padding:16px;
+      border-radius:10px;
+      text-align:center;
+      font-size:23px;
+      font-weight:bold;">
+      01328977033
+    </div>
+
+    <p class="small">
+      ⚠️ এই নম্বরটি শুধু ডেমো প্রদর্শনের জন্য।
+      কোনো বাস্তব টাকা পাঠাবেন না।
+    </p>
+
+    <input id="demoTrx"
+           placeholder="Demo Transaction ID">
+
+    <button onclick="demoDeposit()">
+      Demo Deposit
+    </button>
+  </div>
+
+
+  <!-- REFERRAL -->
+  <div id="referral" class="card hidden">
+    <h2>🔗 Referral Program</h2>
+
+    <p>আপনার Referral Code:</p>
+
+    <div class="refbox">
+      <b id="myReferralCode">---</b>
+    </div>
+
+    <button onclick="copyReferral()">
+      📋 Copy Referral Link
+    </button>
+
+    <p>আপনার Demo Referral Link:</p>
+
+    <div class="refbox" id="referralLink">
+      ---
+    </div>
+
+    <div class="stat">
+      <span>👥 Referred Users</span>
+      <b id="refCount">0</b>
+    </div>
+
+    <div class="stat">
+      <span>🎁 Demo Referral Bonus</span>
+      <b id="refBonus">৳0</b>
+    </div>
+
+    <p class="small">
+      Referral bonus শুধুমাত্র Demo হিসাব।
+      কোনো বাস্তব কমিশন দেওয়া হয় না।
+    </p>
+  </div>
+
+
+  <!-- WITHDRAW -->
+  <div id="withdraw" class="card hidden">
+    <h2>💰 Demo Withdraw</h2>
+
+    <input id="withdrawAmount"
+           type="number"
+           placeholder="Amount">
+
+    <input id="withdrawMobile"
+           placeholder="Demo Mobile Number">
+
+    <button class="green" onclick="demoWithdraw()">
+      Demo Withdraw
+    </button>
+
+    <p class="small">
+      এটি বাস্তব Withdrawal নয়।
+      শুধুমাত্র UI Demo।
+    </p>
+  </div>
+
+
+  <button class="red" onclick="logout()">
+    Logout
+  </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+let selected = 0;
+let balance = 0;
+let referralCount = 0;
+let referralBonus = 0;
+
+
+/* PAGE */
+
+function showRegister(){
+  loginPage.classList.add("hidden");
+  registerPage.classList.remove("hidden");
+}
+
+function showLogin(){
+  registerPage.classList.add("hidden");
+  loginPage.classList.remove("hidden");
+}
+
+function showSection(section){
+
+  packages.classList.add("hidden");
+  deposit.classList.add("hidden");
+  referral.classList.add("hidden");
+  withdraw.classList.add("hidden");
+
+  document.getElementById(section)
+    .classList.remove("hidden");
+}
+
+
+/* REGISTER */
+
+function register(){
+
+  const mobile =
+    document.getElementById("regMobile").value.trim();
+
+  const password =
+    document.getElementById("regPassword").value;
+
+  const referral =
+    document.getElementById("regReferral").value.trim();
+
+  if(!mobile || !password){
+    alert("মোবাইল নম্বর ও পাসওয়ার্ড দিন");
+    return;
+  }
+
+  localStorage.setItem("demoMobile",mobile);
+  localStorage.setItem("demoPassword",password);
+
+  /* Referral ব্যবহার করা হলে Demo count */
+  if(referral){
+    localStorage.setItem("usedReferral",referral);
+  }
+
+  alert("Demo Registration সফল হয়েছে!");
+
+  showLogin();
+}
+
+
+/* LOGIN */
+
+function login(){
+
+  const mobile =
+    document.getElementById("loginMobile").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const savedMobile =
+    localStorage.getItem("demoMobile");
+
+  const savedPassword =
+    localStorage.getItem("demoPassword");
+
+  if(
+    mobile === savedMobile &&
+    password === savedPassword
+  ){
+
+    loginPage.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+
+    createReferral();
+
+  }else{
+
+    alert("Demo Login তথ্য সঠিক নয়");
+
+  }
+}
+
+
+/* REFERRAL */
+
+function createReferral(){
+
+  let code =
+    localStorage.getItem("myReferralCode");
+
+  if(!code){
+
+    code =
+      "LIMON" +
+      Math.floor(1000 + Math.random() * 9000);
+
+    localStorage.setItem(
+      "myReferralCode",
+      code
+    );
+  }
+
+  document.getElementById(
+    "myReferralCode"
+  ).innerText = code;
+
+  const link =
+    window.location.href.split("?")[0] +
+    "?ref=" + code;
+
+  document.getElementById(
+    "referralLink"
+  ).innerText = link;
+}
+
+
+/* COPY */
+
+function copyReferral(){
+
+  const link =
+    document.getElementById(
+      "referralLink"
+    ).innerText;
+
+  navigator.clipboard.writeText(link);
+
+  alert("Referral Link Copy হয়েছে!");
+}
+
+
+/* PACKAGE */
+
+function selectPackage(amount){
+
+  selected = amount;
+
+  document.getElementById(
+    "selectedAmount"
+  ).innerText =
+    "৳" + amount.toLocaleString();
+
+  showSection("deposit");
+}
+
+
+/* DEMO DEPOSIT */
+
+function demoDeposit(){
+
+  if(selected === 0){
+    alert("আগে একটি Package Select করুন");
+    return;
+  }
+
+  const trx =
+    document.getElementById("demoTrx").value.trim();
+
+  if(!trx){
+    alert("Demo Transaction ID দিন");
+    return;
+  }
+
+  balance += selected;
+
+  document.getElementById(
+    "balance"
+  ).innerText =
+    "৳" + balance.toLocaleString();
+
+  alert(
+    "Demo Deposit সফল!\n" +
+    "Amount: ৳" +
+    selected.toLocaleString()
+  );
+
+  document.getElementById(
+    "demoTrx"
+  ).value = "";
+}
+
+
+/* DEMO WITHDRAW */
+
+function demoWithdraw(){
+
+  const amount =
+    Number(
+      document.getElementById(
+        "withdrawAmount"
+      ).value
+    );
+
+  if(!amount || amount <= 0){
+    alert("Amount দিন");
+    return;
+  }
+
+  alert(
+    "Demo Withdrawal Request তৈরি হয়েছে!\n\n" +
+    "Amount: ৳" +
+    amount.toLocaleString() +
+    "\n\nবাস্তবে কোনো টাকা পাঠানো হবে না।"
+  );
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+  dashboard.classList.add("hidden");
+  loginPage.classList.remove("hidden");
+
+}
+
+
+/* URL REFERRAL DETECTION */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const ref =
+  params.get("ref");
+
+if(ref){
+
+  setTimeout(function(){
+
+    showRegister();
+
+    document.getElementById(
+      "regReferral"
+    ).value = ref;
+
+  },300);
+}
+
+</script>
+
+</body>
+</html>
